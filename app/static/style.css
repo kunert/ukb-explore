@@ -1,0 +1,80 @@
+/* Remove default bullets */
+html{
+	font-family:sans-serif;
+}
+ul, #ukb_tree {
+  list-style-type: none;
+}
+
+/* Remove margins and padding from the parent ul */
+#ukb_tree {
+  margin: 0;
+  padding: 0;
+}
+
+/* Style the caret/arrow */
+.caret {
+  cursor: pointer; 
+  user-select: none; /* Prevent text selection */
+}
+
+/* Create the caret/arrow with a unicode, and style it */
+.caret::before {
+  content: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALCAYAAACprHcmAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAEJJREFUGJW1kcEKACAIQ9/C//9lOwURk/LQbroHOhWQPCoAMu+8JEZlOFm4UguOavRer0xxNhboQv/b2cLV3UXjgxPHMhEZy3NwKAAAAABJRU5ErkJggg==');
+  color: black;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+/* Rotate the caret/arrow icon when clicked on (using JavaScript) */
+.caret-down::before {
+  content: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALCAYAAACprHcmAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAD5JREFUGJW1kTEKADAIA8/iw/J0f9ZOLoVSCzVTCEdQYsCkKAeIiCsoiVFtBRphTyPpCOVPvgffzuiDjYcFF/q6CllbopomAAAAAElFTkSuQmCC'); 
+}
+
+/* Hide the nested list */
+.nested {
+  display: none;
+}
+
+/* Show the nested list when the user clicks on the caret/arrow (with JavaScript) */
+.active {
+  display: block;
+}
+
+.p-selected {
+  color: red;
+}
+.p-unselected {
+  color: black;
+}
+
+#tree {
+	display:block;
+	float:left;
+	height:80%;
+	width:40%;
+	background-color:#ffffff;
+	overflow:scroll
+	
+}
+#selected-summary {
+	display:block;
+	float:left;
+	width:60%;
+	height:80%;
+	background-color:#ddddff;
+	margin:0;
+	padding:0;
+	overflow:scroll
+}
+
+#field-list {
+	display:block;
+	float:left;
+	width:100%;
+	height:20%;
+	background-color:#eeffff;
+	margin:0;
+	padding:0;
+	overflow:auto;
+}

@@ -1,0 +1,24 @@
+<html>
+    <head>
+    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+        <title>UKB Explorer</title>        
+    </head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style.css') }}">
+    
+    <body>
+    	<div id='tree'>
+        {{ tree }}
+        </div>
+        <div id="selected-summary"></div>
+        
+        <div id="field-list">
+        	<div id="flist"></div>
+        	<br>
+        	<button type="button" id="clear_flist">Clear List</button>
+        	<button type="button" id="download_flist">Download Selected</button>
+        </div>
+    </body>
+    
+    <script type="text/javascript" src="{{ url_for('static',filename='scripts.js') }}"></script>
+  
+</html>
