@@ -25,6 +25,9 @@ def construct_tree(x):
         c=np.where(c)[0]
         return ['<li id="{:}"><span class="caret"></span>{:}  {:}<ul class="nested">'.format(cat_ids[x],cat_lab[cat_ids[x]],num_fields(cat_ids[x])),[construct_tree(k) for k in c],'</ul></li>']
     return '<li id="{:}">- {:}  {:}</li>'.format(cat_ids[x],cat_lab[cat_ids[x]],num_fields(cat_ids[x]))
+  
+def cat_li(k):
+	return '<li id="{:}">- {:}  {:}</li>'.format(k,cat_lab[k],num_fields(k))
 def flatten_list(l):
     f=''
     for x in l:
@@ -37,7 +40,24 @@ def flatten_list(l):
 
 def generate_phenotype_tree():
     return '<ul id="ukb_tree">'+flatten_list([construct_tree(t) for t in tops])+'</ul>'
-    
+#-- some code which takes in a keyword and outputs category numbers which are relevant in some way..
+ctext=cat_info.groupby('category_id')[['title','descript']].sum().astype(str).apply(lambda x: ' '.join(x),axis=1).str.lower().to_frame()
+ftext=pd.read_csv(os.path.join(fpath,'data', 'field.txt'),sep='\t',usecols=['field_id','title','notes','main_category'])
+ftext['main_category']=ftext['main_category'].astype('int')
+ftext=ftext.groupby('main_category')[['title','notes']].sum().apply(lambda x: ' '.join(x),axis=1).str.lower().to_frame()
+ftext=ftext.astype('str')
+ctext=ctext.astype('str')
+ctext.index.names=['cat_id']
+ftext.index.names=['cat_id']
+
+ctext=ctext.join(ftext,on='cat_id',how='outer',rsuffix='_')
+ctext=ctext.fillna('').apply(lambda x: ' '.join(x),axis=1)
+ftext=[]
+
+def search_cats(query):
+    qlist=[int (q) for q in ctext[ctext.str.contains(query)].index]
+    return qlist
+#    
 def a2str(x):
     return x[0]
 df=pd.read_csv(os.path.join(fpath,'data', 'field.txt'),sep='\t',usecols=['title','field_id','main_category'])

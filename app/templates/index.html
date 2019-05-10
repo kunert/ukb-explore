@@ -6,8 +6,21 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style.css') }}">
     
     <body>
-    	<div id='tree'>
+    	<div id='explore'>
+    	<div class="tab">
+		  <button class="tablinks" onclick="openTab(event, 'tab-tree')">Tree</button>
+		  <button class="tablinks" onclick="openTab(event, 'tab-search')">Search</button>
+		</div>
+    	
+    	
+    	<div id='tab-tree' class='tabcontent'>
         {{ tree }}
+        </div>
+        <div id='tab-search' class='tabcontent'>
+		    <input class='search-bar 'type='text' ></input>
+		    <button type="button" class="search-button">Search</button>
+		    <div id='search-results'></div>
+        </div>
         </div>
         <div id="selected-summary"></div>
         
@@ -16,6 +29,7 @@
         	<br>
         	<button type="button" id="clear_flist">Clear List</button>
         	<button type="button" id="download_flist">Download Selected</button>
+        	<div id="search-results"></div>
         </div>
     </body>
     

@@ -1,7 +1,8 @@
 from flask import render_template,Markup,jsonify,request,make_response
 from app import app
-from phenotype_info import generate_phenotype_tree,category_to_label,category_to_description,phenotype_to_label
+from phenotype_info import generate_phenotype_tree,category_to_label,category_to_description,phenotype_to_label,cat_li,search_cats
 import pandas as pd 
+
 @app.route('/')
 @app.route('/index')
 def index():
@@ -13,10 +14,12 @@ def cat_fields():
 	try:
 		cati=request.args.get('cati',default=None,type=int)
 		try:
-			fields=category_to_label(int(cati))
 			desc=category_to_description(int(cati))
 		except:
 			desc=''
+		try:			
+			fields=category_to_label(int(cati))
+		except:
 			fields=[]
 		return jsonify(fields=fields,desc=desc)
 	except Exception as e:
@@ -56,3 +59,12 @@ def download():
 	resp.headers["Content-Disposition"] = "attachment; filename=export.csv"
 	resp.headers["Content-Type"] = "text/csv"
 	return resp
+	
+@app.route('/search')
+def search():
+	try:
+		query=request.args.get('query',default=None,type=str)
+		qlist=search_cats(query)
+		return jsonify(results=[cat_li(k) for k in qlist])
+	except Exception as e:
+		raise e
