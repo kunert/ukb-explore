@@ -1,6 +1,6 @@
 from flask import render_template,Markup,jsonify,request,make_response
 from app import app
-from phenotype_info import generate_phenotype_tree,category_to_label,category_to_description,phenotype_to_label,cat_li,search_cats
+from .phenotype_info import generate_phenotype_tree,category_to_label,category_to_description,phenotype_to_label,cat_li,search_cats
 import pandas as pd 
 
 @app.route('/')
