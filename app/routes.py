@@ -12,7 +12,7 @@ def index():
 @app.route('/cat_fields')
 def cat_fields():
 	try:
-		cati=request.args.get('cati',default=None,type=int)
+		cati=request.args.get('cati',default=None,type=str)
 		try:
 			desc=category_to_description(int(cati))
 		except:

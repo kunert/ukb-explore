@@ -52,7 +52,7 @@ df=pd.read_csv(os.path.join(fpath,'data', 'field.txt'),sep='\t',usecols=['title'
 category_to_pheno=df.groupby('main_category')['field_id'].unique().to_dict()
 pheno_to_label=df.groupby('field_id')['title'].unique().apply(a2str).to_dict()
 def phenotype_to_label(p):
-	return [p,pheno_to_label[p]]
+	return [str(p),pheno_to_label[p]]
 def category_to_label(t):
     phenos=category_to_pheno[t]
     return [phenotype_to_label(p) for p in phenos]
