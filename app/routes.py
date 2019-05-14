@@ -54,7 +54,7 @@ def reset_flist():
 		
 @app.route('/download')
 def download():
-	df=pd.DataFrame([phenotype_to_label(f) for f in flist]).to_csv(header=False,index=False)
+	df=pd.DataFrame([phenotype_to_label(f) for f in flist]).to_csv(header=False,index=False,sep='\t',compression=None)
 	resp = make_response(df)
 	resp.headers["Content-Disposition"] = "attachment; filename=export.csv"
 	resp.headers["Content-Type"] = "text/csv"

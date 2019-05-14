@@ -38,7 +38,11 @@ function liCallback(tag) {
 	    		items.push('<li id="'+val[0]+'"><input type="checkbox" id="'+val[0]+'" '+isChecked+' />'+val[1]+'</li>');
 	    	});
 		  	$("#selected-summary").html(data.desc+'<ul class="ukb-fields">'+items.join("")+'</ul>');
-	  }).then(function(){$('#selected-summary').html($('#selected-summary').html().replace(RegExp($('.search-bar').val(),'g'), function(match) {return '<span class="hilite">' + match + '</span>'}))});
+	  }).then(function(){
+	  	if ($('.search-bar').val().length>2){
+		  	$('#selected-summary').html($('#selected-summary').html().replace(RegExp($('.search-bar').val(),'g'), function(match) {return '<span class="hilite">' + match + '</span>'}))
+		}
+	  });
 }
 
 $(document).ready(function(){
