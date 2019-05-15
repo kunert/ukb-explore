@@ -126,3 +126,52 @@ ul, #ukb_tree {
  .hilite{
  	color:#ff0000;
  }
+ 
+ .iobutton{
+ 	font-size:16px;
+ 	margin-top:auto;
+ 	text-align:center;
+ 	margin-left:10px;
+ 	width:150px;
+ 	height:30px;
+ 	line-height:30px;
+ 	background-color:#cccccc;
+ 	float:left;
+ 	cursor:pointer;
+ }
+ .iobutton:hover{
+ 	background-color:#bbbbbb;
+ }
+#downlink{
+	color:#000000;
+}
+.check_all{
+	font-size:16px;
+ 	margin-top:auto;
+ 	text-align:center;
+ 	margin-left:10px;
+ 	width:100px;
+ 	height:30px;
+ 	line-height:30px;
+ 	background-color:#cccccc;
+ 	float:left;
+ 	cursor:pointer;
+}
+ .check_all:hover{
+ 	background-color:#bbbbbb;
+ }
+ .uncheck_all{
+	font-size:16px;
+ 	margin-top:auto;
+ 	text-align:center;
+ 	margin-left:10px;
+ 	width:100px;
+ 	height:30px;
+ 	line-height:30px;
+ 	background-color:#cccccc;
+ 	float:left;
+ 	cursor:pointer;
+}
+ .uncheck_all:hover{
+ 	background-color:#bbbbbb;
+ }

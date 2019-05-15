@@ -1,4 +1,4 @@
-from flask import render_template,Markup,jsonify,request,make_response
+from flask import render_template,Markup,jsonify,request,make_response,send_file
 from app import app
 from .phenotype_info import generate_phenotype_tree,category_to_label,category_to_description,phenotype_to_label,cat_li,search_cats
 import pandas as pd 
@@ -24,7 +24,7 @@ def cat_fields():
 		return jsonify(fields=fields,desc=desc)
 	except Exception as e:
 		raise e
-
+"""
 global flist		
 flist=[]
 @app.route('/field_list')
@@ -51,14 +51,30 @@ def reset_flist():
 		return jsonify(flist=flist)
 	except Exception as e:
 		raise e
-		
+"""
+
+@app.route('/field_list')
+def field_list():
+	try:
+		flist=request.args.get('flist',type=str)
+		if flist=='[]':
+			return jsonify([])
+		else:
+			flist=flist.replace('[','').replace(']','').replace('"','').split(',')
+			return jsonify([phenotype_to_label(int(f)) for f in flist])
+	except Exception as e:
+		raise e
+
 @app.route('/download')
 def download():
-	df=pd.DataFrame([phenotype_to_label(f) for f in flist]).to_csv(header=False,index=False,sep='\t',compression=None)
-	resp = make_response(df)
-	resp.headers["Content-Disposition"] = "attachment; filename=export.csv"
-	resp.headers["Content-Type"] = "text/csv"
-	return resp
+	flist=request.args.get('flist',type=str)
+	if flist=='[]':
+		return ''
+	else:
+		flist=flist.replace('[','').replace(']','').replace('"','').split(',')
+		#df=pd.DataFrame([phenotype_to_label(int(f)) for f in flist]).to_csv(header=False,index=False,sep='\t',compression=None)
+		df=[phenotype_to_label(int(f)) for f in flist]
+		return jsonify(' \\n '.join(['{:},{:}'.format(a,b) for a,b in df]))
 	
 @app.route('/search')
 def search():
